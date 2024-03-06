@@ -25,22 +25,34 @@ We don't want to make the project yet, we want to apply patches only.
 
 7. If you compile it now and run it, you will get the error:
 
-`Job for dnsmasq.service failed because the control process exited with error code.
-See "systemctl status dnsmasq.service" and "journalctl -xeu dnsmasq.service" for details.`
+```
+Job for dnsmasq.service failed because the control process exited with error code.
+See "systemctl status dnsmasq.service" and "journalctl -xeu dnsmasq.service" for details.
+```
 
 `journalctl -xeu dnsmasq.service`
 gives:
+
 `Failed to start dnsmasq - A lightweight DHCP and caching DNS server.`
 
 `journalctl -f`
 log shows:
+
 `dnsmasq: failed to bind DHCP server socket: Permission denied`.
 
 To fix it, you need to enable `dbus`.
 
 8. Enable dbus: Edit `./dnsmasq-regex/dnsmasq/src/config.h` uncomment the line `/* #define HAVE_DBUS */`
 
-9. Open `./dnsmasq-regex/Makefile`, uncomment the two lines we commented earlier `cd dnsmasq && $(MAKE) COPTS=$(DNSMASQ_COPTS)`, then comment the line `@patch -p 1 -d dnsmasq < $^ && touch $@` to disable applying patches (this is becaues the patches won't be applied if the `config.h` file is modified).
+9. Open `./dnsmasq-regex/Makefile`, uncomment the two lines we commented earlier:
+
+`cd dnsmasq && $(MAKE) COPTS=$(DNSMASQ_COPTS)`,
+
+then comment the line
+
+`@patch -p 1 -d dnsmasq < $^ && touch $@`
+
+to disable applying patches (this is becaues the patches won't be applied if the `config.h` file is modified).
 
 10. Run `make` inside `./dnsmasq-regex/`. This will build dnsmasq.
 
@@ -53,7 +65,11 @@ install : install-common
 ```
 Then run `sudo make install`
 
-12. You will need to modify the service path `sudo vim /usr/lib/systemd/system/dnsmasq.service` from `/usr/bin/dnsmasq` to `/usr/local/sbin/dnsmasq` then run `systemctl daemon-reload`
+12. You will need to modify the service path:
+
+`sudo vim /usr/lib/systemd/system/dnsmasq.service`
+
+from `/usr/bin/dnsmasq` to `/usr/local/sbin/dnsmasq` then run `systemctl daemon-reload`
 
 13. Run `systemctl restart dnsmasq` Then `/usr/local/sbin/dnsmasq --version` You should see it saying `regex`
 
