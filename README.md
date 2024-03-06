@@ -1,5 +1,4 @@
-### Patches copied from:
-### https://github.com/lixingcong/dnsmasq-regex
+### dnsmasq-regex (fork of: https://github.com/lixingcong/dnsmasq-regex)
 
 1. Install normal dnsmasq, make sure it works.
 2. Download dnsmasq v2.90 (https://thekelleys.org.uk/dnsmasq/) and extract it into: `./dnsmasq-regex/dnsmasq`
