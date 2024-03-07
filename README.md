@@ -15,7 +15,7 @@ DNSMASQ_COPTS="-DHAVE_REGEX"
 
 4. Now we need to apply the regex patches (from repo https://github.com/lixingcong/dnsmasq-regex) on dnsmasq:
 
-5. Open `./dnsmasq-regex/Makefile`, comment out the two lines:
+5. Open `./dnsmasq-regex/Makefile`, disable building by commenting the two lines:
 ```
 cd dnsmasq && $(MAKE) COPTS=$(DNSMASQ_COPTS)
 ```
@@ -43,6 +43,8 @@ log shows:
 To fix it, you need to enable `dbus`.
 
 8. Enable dbus: Edit `./dnsmasq-regex/dnsmasq/src/config.h` uncomment the line `/* #define HAVE_DBUS */`
+
+On ubuntu, you need to `sudo apt install nettle-dev` and uncomment `/* #define HAVE_DNSSEC */`
 
 9. Open `./dnsmasq-regex/Makefile`, uncomment the two lines we commented earlier:
 
