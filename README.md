@@ -75,6 +75,8 @@ Or: type `which dnsmasq`, see where it is installed, move it to `dnsmasq_old` an
 
 13. Run `systemctl restart dnsmasq` Then `/usr/local/sbin/dnsmasq --version` You should see it saying `regex`
 
+14. To make sure which dnsmasq is running, run `whereis dnsmasq` or `which dnsmasq`
+
 // Solve error on ubuntu:
 If running the executable gives `libpcre.so.1 is not found`, run `sudo apt-cache search pcre` and install needed library (not sure which one, but one of them works)
 # Troubleshoot:
