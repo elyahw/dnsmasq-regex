@@ -65,11 +65,13 @@ install : install-common
 ```
 Then run `sudo make install`
 
-12. You will need to modify the service path:
+12. Either: You will need to modify the service path:
 
 `sudo vim /usr/lib/systemd/system/dnsmasq.service`
 
-from `/usr/bin/dnsmasq` to `/usr/local/sbin/dnsmasq` then run `systemctl daemon-reload`
+from `/usr/bin/dnsmasq` to `/usr/local/sbin/dnsmasq` then run `systemctl daemon-reload`.
+
+Or: type `which dnsmasq`, see where it is installed, move it to `dnsmasq_old` and replace it by the new one.
 
 13. Run `systemctl restart dnsmasq` Then `/usr/local/sbin/dnsmasq --version` You should see it saying `regex`
 
